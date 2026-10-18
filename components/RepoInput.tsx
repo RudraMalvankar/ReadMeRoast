@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Flame, Link as LinkIcon, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { Flame, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { GithubIcon } from "@/components/GithubIcon";
 import { validateAndParseGithubUrl } from "@/lib/validation";
 
 interface RepoInputProps {
@@ -18,7 +19,7 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
 
   const sampleRepos = [
     { label: "facebook/react", url: "https://github.com/facebook/react" },
-    { label: "expressjs/express", url: "https://github.com/expressjs/express" },
+    { label: "vercel/next.js", url: "https://github.com/vercel/next.js" },
     { label: "tailwindlabs/tailwindcss", url: "https://github.com/tailwindlabs/tailwindcss" },
   ];
 
@@ -55,9 +56,9 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
   return (
     <div className="w-full max-w-2xl mx-auto">
       <form onSubmit={handleSubmit} className="relative">
-        <div className="group relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-xl border border-white/[0.12] bg-[#12131a] p-1.5 shadow-2xl transition-all focus-within:border-orange-500/50 focus-within:ring-2 focus-within:ring-orange-500/20">
+        <div className="group relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl border border-white/[0.12] bg-[#10131c] p-2 shadow-2xl transition-all focus-within:border-orange-500/60 focus-within:ring-2 focus-within:ring-orange-500/20">
           <div className="flex items-center flex-1 px-3 py-2 sm:py-0">
-            <LinkIcon className="h-4 w-4 text-zinc-500 mr-2.5 flex-shrink-0 group-focus-within:text-orange-400 transition-colors" />
+            <GithubIcon className="h-5 w-5 text-zinc-400 mr-3 flex-shrink-0 group-focus-within:text-orange-400 transition-colors" />
             <input
               type="text"
               value={url}
@@ -65,7 +66,7 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
                 setUrl(e.target.value);
                 if (error) setError(null);
               }}
-              placeholder="https://github.com/user/repository"
+              placeholder="https://github.com/username/repository"
               className="w-full bg-transparent text-sm sm:text-base font-mono text-zinc-100 placeholder-zinc-500 focus:outline-none"
               disabled={isLoading}
               autoComplete="off"
@@ -76,7 +77,7 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
           <button
             type="submit"
             disabled={isLoading}
-            className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-orange-600 to-amber-600 px-5 py-2.5 sm:py-3 text-sm font-semibold text-white shadow-md hover:from-orange-500 hover:to-amber-500 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+            className="flex items-center justify-center gap-2 rounded-xl bg-[#f97316] hover:bg-[#ea580c] px-6 py-3 text-sm font-bold text-white shadow-lg active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed transition-all flex-shrink-0 cursor-pointer"
           >
             {isLoading ? (
               <>
@@ -85,16 +86,16 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
               </>
             ) : (
               <>
-                <Flame className="h-4 w-4 text-amber-200 fill-amber-200" />
+                <Flame className="h-4 w-4 fill-white text-white" />
                 <span>Roast My README</span>
-                <ArrowRight className="h-3.5 w-3.5 opacity-80" />
+                <ArrowRight className="h-4 w-4" />
               </>
             )}
           </button>
         </div>
 
         {error && (
-          <div className="mt-2.5 flex items-center gap-1.5 text-xs text-rose-400 font-medium">
+          <div className="mt-2.5 flex items-center gap-1.5 text-xs text-rose-400 font-medium justify-center">
             <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -112,7 +113,7 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
             key={sample.label}
             type="button"
             onClick={() => handleSelectSample(sample.url)}
-            className="rounded border border-white/[0.08] bg-zinc-900/60 px-2 py-0.5 font-mono text-[11px] text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white transition-colors"
+            className="rounded-md border border-white/[0.08] bg-zinc-900/60 px-2 py-0.5 font-mono text-[11px] text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800 hover:text-white transition-colors cursor-pointer"
           >
             {sample.label}
           </button>

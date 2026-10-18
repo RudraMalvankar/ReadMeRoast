@@ -11,6 +11,7 @@ export interface RepoMetadata {
   htmlUrl: string;
   topics: string[];
   license?: string;
+  updatedAt?: string;
 }
 
 export interface ReadmeData {
@@ -100,6 +101,7 @@ export async function fetchRepoMetadata(owner: string, repo: string): Promise<Re
     htmlUrl: data.html_url || `https://github.com/${owner}/${repo}`,
     topics: Array.isArray(data.topics) ? data.topics : [],
     license: data.license?.spdx_id || data.license?.name || undefined,
+    updatedAt: data.pushed_at || data.updated_at || undefined,
   };
 }
 

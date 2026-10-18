@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
         htmlUrl: metadata.htmlUrl,
         license: metadata.license,
         topics: metadata.topics,
+        updatedAt: metadata.updatedAt,
       },
       readmeStats: {
         rawSize: readme.rawSize,

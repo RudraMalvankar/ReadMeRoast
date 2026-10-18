@@ -40,6 +40,10 @@ body {
   font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+.font-handwritten {
+  font-family: var(--font-caveat), cursive;
+}
+
 /* Subtle dot grid for clean dev-tool feel */
 .bg-grid-pattern {
   background-size: 32px 32px;

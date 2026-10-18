@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrench, CheckCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface RecommendationsProps {
   recommendations: string[];
@@ -9,27 +9,26 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
   if (!recommendations || recommendations.length === 0) return null;
 
   return (
-    <div className="rounded-xl border border-white/[0.08] bg-[#111218] p-6 shadow-xl">
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-4">
-        <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
-          <Wrench className="h-4 w-4" />
-          <span>Fix These First (Priority Action Plan)</span>
-        </div>
-        <span className="text-[11px] font-mono text-zinc-400">High-ROI Updates</span>
+    <div className="h-full rounded-2xl border border-white/[0.08] bg-[#10131c] p-6 shadow-xl flex flex-col justify-between">
+      <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-5">
+        TOP RECOMMENDATIONS
       </div>
 
-      <div className="space-y-2.5">
-        {recommendations.map((rec, idx) => {
+      <div className="space-y-3 flex-1">
+        {recommendations.slice(0, 5).map((rec, idx) => {
           const num = String(idx + 1).padStart(2, "0");
           return (
             <div
               key={idx}
-              className="flex items-start gap-3 rounded-lg border border-white/[0.06] bg-zinc-900/50 p-3 text-sm text-zinc-200"
+              className="group flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-[#131620] px-4 py-3 text-xs sm:text-sm text-zinc-200 hover:border-zinc-700 transition-colors"
             >
-              <span className="font-mono text-xs font-bold text-orange-400 flex-shrink-0 mt-0.5 rounded bg-orange-500/10 px-1.5 py-0.5 border border-orange-500/20">
-                {num}
-              </span>
-              <span className="leading-snug">{rec}</span>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs font-bold text-amber-400 rounded bg-amber-500/10 px-1.5 py-0.5 border border-amber-500/20">
+                  {num}
+                </span>
+                <span className="leading-snug">{rec}</span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-zinc-500 group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
             </div>
           );
         })}

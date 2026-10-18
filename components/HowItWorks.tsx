@@ -24,7 +24,7 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="py-16 border-t border-white/[0.08] relative">
+    <section id="how-it-works" className="py-16 border-t border-white/[0.08] relative">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="text-center mb-12">
           <span className="text-xs font-mono uppercase tracking-wider text-orange-400">

@@ -1,10 +1,10 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { HowItWorks } from "@/components/HowItWorks";
 import { WhatYouGet } from "@/components/WhatYouGet";
 import { ExampleRoasts } from "@/components/ExampleRoasts";
-import { OpenSourceAi } from "@/components/OpenSourceAi";
+import { HowItWorks } from "@/components/HowItWorks";
+import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -13,10 +13,10 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <HowItWorks />
         <WhatYouGet />
         <ExampleRoasts />
-        <OpenSourceAi />
+        <HowItWorks />
+        <FAQ />
       </main>
       <Footer />
     </div>

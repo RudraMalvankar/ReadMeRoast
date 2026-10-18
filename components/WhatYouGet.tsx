@@ -1,66 +1,77 @@
 import React from "react";
-import { Gauge, Flame, AlertCircle, ListChecks, FileCode2 } from "lucide-react";
+import { Flame, AlertTriangle, Wrench, FileText } from "lucide-react";
 
 export function WhatYouGet() {
-  const features = [
+  const items = [
     {
-      icon: Gauge,
-      title: "7-Dimension Score",
-      desc: "Granular evaluation across Clarity, Setup, Usage, Examples, Visuals, and Developer Experience.",
+      customIcon: (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 font-bold text-sm">
+          78
+        </div>
+      ),
+      title: "README",
+      subtitle: "score",
     },
     {
-      icon: Flame,
-      title: "The Constructive Roast",
-      desc: "Unvarnished honesty that calls out badge bloat, missing commands, and documentation archaeology.",
+      customIcon: (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400">
+          <Flame className="h-5 w-5 fill-orange-400 text-orange-400" />
+        </div>
+      ),
+      title: "AI",
+      subtitle: "roast",
     },
     {
-      icon: AlertCircle,
-      title: "Categorized Problems",
-      desc: "Problems tagged by High, Medium, or Low severity with specific explanations and recommended fixes.",
+      customIcon: (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400">
+          <AlertTriangle className="h-5 w-5" />
+        </div>
+      ),
+      title: "Problems",
+      subtitle: "worth fixing",
     },
     {
-      icon: ListChecks,
-      title: "Priority Recommendations",
-      desc: "Actionable, numbered steps so you know exactly which improvements have the highest ROI.",
+      customIcon: (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400">
+          <Wrench className="h-5 w-5" />
+        </div>
+      ),
+      title: "Actionable",
+      subtitle: "recommendations",
     },
     {
-      icon: FileCode2,
-      title: "One-Click Fixed README",
-      desc: "Zero hallucination guarantee. Reorganizes existing facts and leaves clear placeholders for missing details.",
+      customIcon: (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+          <FileText className="h-5 w-5" />
+        </div>
+      ),
+      title: "Improved",
+      subtitle: "README",
     },
   ];
 
   return (
-    <section className="py-16 border-t border-white/[0.08] bg-zinc-950/40">
+    <section className="py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="text-center mb-12">
-          <span className="text-xs font-mono uppercase tracking-wider text-orange-400">
-            Comprehensive Analysis
-          </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-white">
-            What You Get in Every Review
-          </h2>
-          <p className="mt-2 text-sm text-zinc-400 max-w-lg mx-auto">
-            Not just a generic score — a complete documentation health audit and turnkey replacement.
-          </p>
-        </div>
+        <h2 className="text-center text-lg font-bold text-white mb-8">
+          What you&apos;ll get
+        </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feat) => {
-            const Icon = feat.icon;
-            return (
-              <div
-                key={feat.title}
-                className="rounded-xl border border-white/[0.08] bg-[#111218] p-5 hover:border-zinc-700 transition-colors"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400 border border-orange-500/20 mb-4">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-base font-semibold text-white">{feat.title}</h3>
-                <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{feat.desc}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 sm:gap-4">
+          {items.map((item, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col items-center justify-center rounded-xl border border-white/[0.08] bg-[#10131c] p-5 text-center shadow-lg transition-transform hover:-translate-y-0.5 hover:border-zinc-700"
+            >
+              <div className="mb-3">{item.customIcon}</div>
+              <div className="text-xs sm:text-sm font-bold text-white leading-tight">
+                {item.title}
               </div>
-            );
-          })}
+              <div className="text-xs text-zinc-400 leading-tight">
+                {item.subtitle}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

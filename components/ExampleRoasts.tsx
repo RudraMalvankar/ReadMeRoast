@@ -1,70 +1,95 @@
+"use client";
+
 import React from "react";
-import { Flame, Quote } from "lucide-react";
+import Link from "next/link";
+import { Flame, ArrowRight } from "lucide-react";
+import { GithubIcon } from "@/components/GithubIcon";
 
 export function ExampleRoasts() {
-  const roasts = [
-    {
-      repo: "badge-collector / ui-kit",
-      score: 58,
-      quote: "Your README has more decorative status badges than actual installation instructions. Bold strategy.",
-      highlight: "Missing Quick Start",
-    },
-    {
-      repo: "cryptic-core / fast-orm",
-      score: 44,
-      quote: "The project looks promising. Unfortunately, figuring out how to run it feels like an archaeological expedition.",
-      highlight: "Zero Usage Examples",
-    },
-    {
-      repo: "stealth-agent / runner",
-      score: 63,
-      quote: "Installation instructions are currently operating on a strictly need-to-know basis. And right now, nobody knows.",
-      highlight: "Missing Env Vars",
-    },
-  ];
+  const exampleRepo = "vercel/next.js";
+  const exampleUrl = "https://github.com/vercel/next.js";
+  const score = 84;
+  const radius = 42;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <section className="py-16 border-t border-white/[0.08]">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="text-center mb-12">
-          <span className="text-xs font-mono uppercase tracking-wider text-orange-400">
-            Real Developer Humor
-          </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-white">
-            Constructive, Savage, Honest
-          </h2>
-          <p className="mt-2 text-sm text-zinc-400 max-w-lg mx-auto">
-            We roast the documentation, never the developer. Every roast is backed by concrete diagnostics.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {roasts.map((roast) => (
-            <div
-              key={roast.repo}
-              className="flex flex-col justify-between rounded-xl border border-white/[0.08] bg-[#111218] p-5 relative"
-            >
-              <div>
-                <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3 border-b border-white/[0.06] pb-2.5">
-                  <span className="truncate max-w-[160px]">{roast.repo}</span>
-                  <span className="text-amber-400 font-bold">{roast.score}/100</span>
-                </div>
-                <div className="text-orange-400/80 mb-2">
-                  <Quote className="h-5 w-5 rotate-180" />
-                </div>
-                <p className="text-sm text-zinc-200 font-mono italic leading-relaxed">
-                  &ldquo;{roast.quote}&rdquo;
-                </p>
+    <section id="examples" className="py-10">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#10131c] p-6 sm:p-8 shadow-2xl">
+          {/* Header row */}
+          <div className="flex items-center justify-between pb-5 border-b border-white/[0.06] mb-6">
+            <div className="flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400">
+                <Flame className="h-4 w-4 fill-orange-400 text-orange-400" />
               </div>
+              <span className="text-sm font-bold text-white tracking-wide">
+                Example Roast
+              </span>
+            </div>
 
-              <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                <span className="text-zinc-500 font-mono text-[11px]">Identified issue:</span>
-                <span className="text-rose-400 font-medium font-mono text-[11px] bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">
-                  {roast.highlight}
+            <Link
+              href={`/roast?url=${encodeURIComponent(exampleUrl)}`}
+              className="group flex items-center gap-1.5 text-xs font-medium text-amber-400 hover:text-amber-300 transition-colors"
+            >
+              <span>Try this repo</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </div>
+
+          {/* Content columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            {/* Left 2 cols: Repo + Quote */}
+            <div className="md:col-span-2 space-y-4">
+              <div className="flex items-center gap-2">
+                <GithubIcon className="h-4 w-4 text-zinc-400" />
+                <span className="text-base font-bold text-white tracking-tight">
+                  vercel / next.js
                 </span>
               </div>
+
+              <blockquote className="text-base sm:text-lg text-zinc-200 font-mono italic leading-relaxed">
+                &ldquo;Your README is actually pretty solid. I came here expecting chaos. Unfortunately, it&apos;s good. Think about what you&apos;ve become.&rdquo;
+              </blockquote>
             </div>
-          ))}
+
+            {/* Right col: Circular score badge */}
+            <div className="flex flex-col items-center justify-center text-center pl-0 md:pl-6 md:border-l md:border-white/[0.06]">
+              <div className="relative flex h-28 w-28 items-center justify-center">
+                <svg className="h-full w-full -rotate-90 transform" viewBox="0 0 100 100">
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r={radius}
+                    className="stroke-zinc-800"
+                    strokeWidth="7"
+                    fill="transparent"
+                  />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r={radius}
+                    className="stroke-emerald-400 transition-all duration-1000 ease-out"
+                    strokeWidth="7"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={strokeDashoffset}
+                    strokeLinecap="round"
+                    fill="transparent"
+                  />
+                </svg>
+
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-2xl font-black text-white">{score}</span>
+                  <span className="text-[10px] font-mono text-zinc-500">/ 100</span>
+                </div>
+              </div>
+
+              <div className="mt-3">
+                <div className="text-xs font-bold text-emerald-400">Great README!</div>
+                <div className="text-[11px] text-zinc-400">Just a few tweaks.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
