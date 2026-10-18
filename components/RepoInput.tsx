@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Flame, Link as LinkIcon, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { validateAndParseGithubUrl } from "@/lib/validation";
 
 interface RepoInputProps {
   initialUrl?: string;
@@ -31,31 +32,13 @@ export function RepoInput({ initialUrl = "", onAnalyze, isLoading = false }: Rep
       return;
     }
 
-    // Quick client-side sanity check
-    let cleanUrl = trimmed;
-    if (!cleanUrl.startsWith("http://") && !cleanUrl.startsWith("https://")) {
-      if (/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(cleanUrl)) {
-        cleanUrl = `https://github.com/${cleanUrl}`;
-      } else {
-        cleanUrl = `https://${cleanUrl}`;
-      }
-    }
-
-    try {
-      const parsed = new URL(cleanUrl);
-      if (!parsed.hostname.includes("github.com")) {
-        setError("Please enter a valid public GitHub repository URL.");
-        return;
-      }
-      const parts = parsed.pathname.split("/").filter(Boolean);
-      if (parts.length < 2) {
-        setError("Please include both the owner and repository (e.g. https://github.com/user/repo).");
-        return;
-      }
-    } catch {
-      setError("Please enter a valid public GitHub repository URL.");
+    const validation = validateAndParseGithubUrl(trimmed);
+    if (!validation.success) {
+      setError(validation.error);
       return;
     }
+
+    const cleanUrl = validation.data.cleanUrl;
 
     if (onAnalyze) {
       onAnalyze(cleanUrl);

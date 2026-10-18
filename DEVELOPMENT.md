@@ -17,3 +17,10 @@ Factual progress log tracking major development milestones, design choices, and 
 - Built HowItWorks (3-step flow), WhatYouGet (7 dimensions, roast, problems, recommendations, fixed README), ExampleRoasts (constructive developer humor), and OpenSourceAi spotlight.
 - Built responsive developer Footer with Hacktoberfest 2026 and Gemma attribution.
 - Verified build and TypeScript checks pass cleanly.
+
+### Milestone 3: GitHub Repository Validation & Parsing
+- Created `lib/validation.ts` with Zod schema validation and URL/shorthand parser.
+- Handles full URLs (`https://github.com/owner/repo`), optional `.git` suffixes, trailing subpaths, and shorthand (`owner/repo`).
+- Disallows invalid formats, reserved non-repo path names, and malformed targets with friendly error messaging.
+- Connected client-side input in `RepoInput.tsx` to shared validation module.
+- Verified production build and types pass.
