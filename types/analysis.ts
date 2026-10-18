@@ -44,6 +44,8 @@ export interface AnalysisResponse {
     language: string;
     defaultBranch: string;
     htmlUrl: string;
+    license?: string;
+    topics?: string[];
   };
   readmeStats: {
     rawSize: number;

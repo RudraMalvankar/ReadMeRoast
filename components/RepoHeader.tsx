@@ -15,6 +15,8 @@ interface RepoHeaderProps {
     language: string;
     defaultBranch: string;
     htmlUrl: string;
+    license?: string;
+    topics?: string[];
   };
   readmeStats?: {
     rawSize: number;
@@ -83,6 +85,18 @@ export function RepoHeader({ metadata, readmeStats }: RepoHeaderProps) {
             <span>{metadata.language}</span>
           </div>
 
+          {metadata.license && (
+            <div className="flex items-center gap-1 rounded-md border border-white/[0.08] bg-zinc-900/80 px-2.5 py-1 text-zinc-300">
+              <Shield className="h-3.5 w-3.5 text-zinc-400" />
+              <span>{metadata.license}</span>
+            </div>
+          )}
+
+          <div className="flex items-center gap-1 rounded-md border border-white/[0.08] bg-zinc-900/80 px-2.5 py-1 text-zinc-300">
+            <CircleDot className="h-3.5 w-3.5 text-zinc-400" />
+            <span>{formatNumber(metadata.openIssues)} issues</span>
+          </div>
+
           <a
             href={metadata.htmlUrl}
             target="_blank"
@@ -94,6 +108,19 @@ export function RepoHeader({ metadata, readmeStats }: RepoHeaderProps) {
           </a>
         </div>
       </div>
+
+      {metadata.topics && metadata.topics.length > 0 && (
+        <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
+          {metadata.topics.slice(0, 8).map((topic) => (
+            <span
+              key={topic}
+              className="rounded-full bg-zinc-900 border border-white/[0.06] px-2 py-0.5 text-[11px] font-mono text-zinc-400"
+            >
+              #{topic}
+            </span>
+          ))}
+        </div>
+      )}
 
       {readmeStats?.isTruncated && (
         <div className="mt-4 flex items-center gap-2 rounded-lg border border-amber-500/20 bg-amber-950/20 px-3.5 py-2 text-xs text-amber-300 font-mono">
