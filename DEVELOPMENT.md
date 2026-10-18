@@ -85,3 +85,11 @@ Factual progress log tracking major development milestones, design choices, and 
 - Created `LICENSE` under the standard open-source MIT License.
 - Built automated verification test suite (`scripts/test-readmeroast.mjs`) covering URL validation, shorthand syntax parsing, reserved path rejection, Zod schema sanitization, and defensive score clamping.
 - Verified `npm test` passes 15/15 checks and `npm run build` passes with zero TypeScript warnings.
+
+### Milestone 13: Live AI Model Resilience & Full Stack Architecture
+- Enhanced Google AI Studio integration to support active model generations (`gemini-2.5-flash`, `gemma-4-31b-it`, `gemma-4-26b-a4b-it`) with automatic candidate failover.
+- Guarded `generationConfig.responseMimeType` parameter dynamically so models that reject structured MIME types do not trigger HTTP 500 errors.
+- Added thought/chain-of-thought extraction filters (`thought: true`) ensuring raw reasoning blocks never leak into user-facing outputs.
+- Built resilient JSON repair parser in `lib/ai/analyze-readme.ts` capable of recovering from unescaped quotes, trailing commas, or syntax anomalies.
+- Verified live end-to-end roasting on real repositories (`RudraMalvankar/Base42`).
+- Prepared full repository for remote publishing to main.
