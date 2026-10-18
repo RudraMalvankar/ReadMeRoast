@@ -3,7 +3,7 @@ import { z } from "zod";
 const envSchema = z.object({
   GEMMA_API_KEY: z.string().optional(),
   GEMINI_API_KEY: z.string().optional(),
-  GEMMA_MODEL: z.string().default("gemma-2-27b-it"),
+  GEMMA_MODEL: z.string().default("gemma-4-31b-it"),
   GROQ_API_KEY: z.string().optional(),
   OPENROUTER_API_KEY: z.string().optional(),
   GEMMA_BASE_URL: z.string().optional(),
@@ -24,7 +24,7 @@ export function getValidatedEnv(): Env {
   if (!result.success) {
     console.warn("Environment validation notice:", result.error.format());
     return {
-      GEMMA_MODEL: "gemma-2-27b-it",
+      GEMMA_MODEL: "gemma-4-31b-it",
       NODE_ENV: "development",
     };
   }

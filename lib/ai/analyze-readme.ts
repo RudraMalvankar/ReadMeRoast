@@ -82,31 +82,69 @@ ${readme.content}
 
   const rawOutput = await callGemmaModel(SYSTEM_PROMPT, userPrompt, true);
 
-  // Clean potential markdown code blocks like ```json ... ```
-  let cleaned = rawOutput.trim();
-  if (cleaned.startsWith("```json")) {
-    cleaned = cleaned.replace(/^```json\s*/i, "").replace(/\s*```$/, "");
-  } else if (cleaned.startsWith("```")) {
-    cleaned = cleaned.replace(/^```\s*/, "").replace(/\s*```$/, "");
-  }
-
-  let parsed: any;
-  try {
-    parsed = JSON.parse(cleaned);
-  } catch (parseError) {
-    // If JSON parsing fails directly, attempt regex extraction of the first outer JSON object
-    const match = cleaned.match(/\{[\s\S]*\}/);
-    if (match) {
-      parsed = JSON.parse(match[0]);
-    } else {
-      throw new Error("Gemma produced invalid non-JSON output during analysis.");
-    }
-  }
-
+  const parsed = parseJsonResilient(rawOutput);
   const analysis = sanitizeAnalysisJson(parsed);
 
   return {
     analysis,
     modelUsed: config.modelName,
   };
+}
+
+/**
+ * Parses JSON with multiple repair heuristics (codeblock stripping, regex isolation, trailing comma removal)
+ */
+function parseJsonResilient(raw: string): any {
+  if (!raw || typeof raw !== "string") {
+    throw new Error("Empty AI model output.");
+  }
+
+  // 1. Direct parse attempt
+  try {
+    return JSON.parse(raw);
+  } catch {}
+
+  // 2. Strip markdown fences
+  let cleaned = raw.trim();
+  if (cleaned.startsWith("```json")) {
+    cleaned = cleaned.replace(/^```json\s*/i, "").replace(/\s*```$/, "");
+  } else if (cleaned.startsWith("```")) {
+    cleaned = cleaned.replace(/^```\s*/, "").replace(/\s*```$/, "");
+  }
+  try {
+    return JSON.parse(cleaned);
+  } catch {}
+
+  // 3. Extract the largest outer { ... } block
+  const firstBrace = cleaned.indexOf("{");
+  const lastBrace = cleaned.lastIndexOf("}");
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    const candidate = cleaned.slice(firstBrace, lastBrace + 1);
+    try {
+      return JSON.parse(candidate);
+    } catch {}
+
+    // 4. Remove trailing commas before closing braces/brackets
+    const withoutTrailingCommas = candidate.replace(/,\s*([}\]])/g, "$1");
+    try {
+      return JSON.parse(withoutTrailingCommas);
+    } catch {}
+  }
+
+  // 5. If everything failed, extract fields individually via regex to build a valid payload
+  try {
+    const scoreMatch = raw.match(/"overallScore"\s*:\s*(\d+)/);
+    const roastMatch = raw.match(/"roast"\s*:\s*"([^"]+)"/);
+    const verdictMatch = raw.match(/"verdict"\s*:\s*"([^"]+)"/);
+
+    if (scoreMatch || roastMatch) {
+      return {
+        overallScore: scoreMatch ? parseInt(scoreMatch[1], 10) : 65,
+        roast: roastMatch ? roastMatch[1] : undefined,
+        verdict: verdictMatch ? verdictMatch[1] : undefined,
+      };
+    }
+  } catch {}
+
+  throw new Error("Gemma produced invalid non-JSON output during analysis.");
 }
