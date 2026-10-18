@@ -60,3 +60,9 @@ Factual progress log tracking major development milestones, design choices, and 
 - Built API route `app/api/improve/route.ts` accepting repository metadata, original README, and diagnostic analysis.
 - Built `ImprovedReadme` component with developer-editor styling, `README.md` file tab, line/character count metrics, Raw Markdown vs Formatted Markdown Preview tabs, one-click clipboard copy, and file download trigger (`.md`).
 - Verified end-to-end build and routes (`/api/improve`, `/roast`).
+
+### Milestone 9: Experience Polish & Developer Tool Ergonomics
+- Polished typography, custom dark scrollbars, and prose formatting in `globals.css` for rendered markdown (headings, code blocks, lists, quotes, tables).
+- Enhanced responsive layout across mobile, tablet, and widescreen viewports with seamless touch interactions and keyboard accessibility.
+- Polished error states for invalid repositories, 404 missing READMEs, and GitHub rate limits with retry mechanisms.
+- Verified build and TypeScript strict validation pass with zero warnings.
