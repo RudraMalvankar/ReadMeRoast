@@ -24,14 +24,11 @@ export function Problems({ problems }: ProblemsProps) {
 
       <div className="space-y-3.5 flex-1">
         {sorted.slice(0, 6).map((item, idx) => (
-          <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-200">
+          <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-200 group">
             <span className="flex h-2 w-2 rounded-full bg-rose-500 flex-shrink-0 mt-1.5 shadow-[0_0_8px_rgba(244,63,94,0.6)]" />
-            <div className="flex-1 leading-snug">
-              <span className="font-medium text-white">{item.title}</span>
-              {item.explanation && item.explanation !== item.title && (
-                <span className="text-zinc-400 text-xs block mt-0.5">{item.explanation}</span>
-              )}
-            </div>
+            <span className="leading-snug font-normal text-zinc-200">
+              {item.title}
+            </span>
           </div>
         ))}
       </div>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Copy, Check, Download, Loader2 } from "lucide-react";
+import { Copy, Check, Download, Loader2, FileCode } from "lucide-react";
 import { AnalysisResponse } from "@/types/analysis";
 
 export interface ImprovedReadmeRef {
@@ -61,7 +61,7 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
       },
     }));
 
-    // Auto-generate if not yet generated so the section is already populated like in the mockup!
+    // Auto-generate if not yet generated
     useEffect(() => {
       if (!improvedMarkdown && !loading && !error) {
         handleGenerate();
@@ -91,15 +91,17 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
     const markdownLines = improvedMarkdown ? improvedMarkdown.split("\n") : [];
 
     return (
-      <section id="improved-readme" className="w-full space-y-4">
+      <section id="improved-readme" className="w-full space-y-4 pt-2">
         {/* Top Header Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
-            IMPROVED README
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
+              IMPROVED README
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Tabs for small screens or toggling views */}
+            {/* View switcher tabs */}
             <div className="flex items-center rounded-lg border border-white/[0.08] bg-[#12141d] p-1 text-xs font-mono">
               <button
                 type="button"
@@ -130,7 +132,7 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
               type="button"
               onClick={handleCopy}
               disabled={!improvedMarkdown || loading}
-              className="flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-[#12141d] px-3 py-1.5 text-xs font-mono text-zinc-300 hover:border-zinc-700 hover:text-white disabled:opacity-40 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-[#12141d] px-3.5 py-1.5 text-xs font-mono text-zinc-300 hover:border-zinc-700 hover:text-white disabled:opacity-40 transition-colors cursor-pointer"
             >
               {copied ? (
                 <>
@@ -149,7 +151,7 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
               type="button"
               onClick={handleDownload}
               disabled={!improvedMarkdown || loading}
-              className="flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-[#12141d] px-3 py-1.5 text-xs font-mono text-zinc-300 hover:border-zinc-700 hover:text-white disabled:opacity-40 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-[#12141d] px-3.5 py-1.5 text-xs font-mono text-zinc-300 hover:border-zinc-700 hover:text-white disabled:opacity-40 transition-colors cursor-pointer"
             >
               <Download className="h-3.5 w-3.5" />
               <span>Download</span>
@@ -158,9 +160,9 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
         </div>
 
         {/* Content Container */}
-        <div className="rounded-2xl border border-white/[0.08] bg-[#0c0e15] overflow-hidden shadow-2xl min-h-[420px]">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#0c0e15] overflow-hidden shadow-2xl min-h-[460px]">
           {loading && (
-            <div className="flex flex-col items-center justify-center p-20 text-center space-y-3">
+            <div className="flex flex-col items-center justify-center p-24 text-center space-y-3">
               <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
               <p className="text-sm font-mono text-zinc-300">
                 Gemma is generating your improved README...
@@ -172,12 +174,12 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
           )}
 
           {error && !loading && (
-            <div className="p-8 text-center text-rose-400 font-mono text-xs">
+            <div className="p-12 text-center text-rose-400 font-mono text-xs space-y-3">
               <p>{error}</p>
               <button
                 type="button"
                 onClick={handleGenerate}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-orange-600 px-3 py-1.5 text-white text-xs hover:bg-orange-500 cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-orange-600 px-4 py-2 text-white text-xs hover:bg-orange-500 cursor-pointer font-sans"
               >
                 Try Again
               </button>
@@ -189,12 +191,18 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
               {/* Desktop Split View: Code editor on left, Rendered Preview on right */}
               <div className="hidden lg:grid lg:grid-cols-2 divide-x divide-white/[0.08]">
                 {/* Code Editor View with Line Numbers */}
-                <div className="p-5 font-mono text-xs text-zinc-300 overflow-x-auto max-h-[640px] overflow-y-auto">
+                <div className="p-4 bg-[#0a0b12] font-mono text-xs text-zinc-300 overflow-x-auto max-h-[580px] overflow-y-auto">
+                  <div className="flex items-center gap-2 pb-3 mb-3 border-b border-white/[0.06] text-[11px] text-zinc-500">
+                    <FileCode className="h-3.5 w-3.5 text-orange-400" />
+                    <span>README.md</span>
+                    <span className="text-zinc-700">|</span>
+                    <span>{markdownLines.length} lines</span>
+                  </div>
                   <table className="w-full border-collapse">
                     <tbody>
                       {markdownLines.map((line, idx) => (
                         <tr key={idx} className="hover:bg-white/[0.02]">
-                          <td className="w-10 select-none pr-4 text-right text-zinc-600 text-[11px] font-mono align-top">
+                          <td className="w-9 select-none pr-3 text-right text-zinc-600 text-[11px] font-mono align-top">
                             {idx + 1}
                           </td>
                           <td className="whitespace-pre font-mono text-[12px] text-zinc-300">
@@ -202,8 +210,8 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
                               <span className="text-sky-300 font-bold">{line}</span>
                             ) : line.startsWith("-") || line.startsWith("*") ? (
                               <span className="text-emerald-300">{line}</span>
-                            ) : line.startsWith("`") ? (
-                              <span className="text-amber-300">{line}</span>
+                            ) : line.startsWith("```") ? (
+                              <span className="text-orange-400 font-bold">{line}</span>
                             ) : (
                               line
                             )}
@@ -215,7 +223,7 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
                 </div>
 
                 {/* Rendered Preview View */}
-                <div className="p-6 sm:p-8 prose prose-invert max-w-none prose-headings:text-white prose-a:text-orange-400 prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/[0.08] overflow-y-auto max-h-[640px] text-xs sm:text-sm">
+                <div className="p-6 sm:p-8 bg-[#0d0f18] prose prose-invert max-w-none prose-headings:text-white prose-a:text-orange-400 prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/[0.08] overflow-y-auto max-h-[580px] text-xs sm:text-sm">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {improvedMarkdown}
                   </ReactMarkdown>
@@ -223,7 +231,7 @@ export const ImprovedReadme = forwardRef<ImprovedReadmeRef, ImprovedReadmeProps>
               </div>
 
               {/* Mobile / Tablet View: Tab-based */}
-              <div className="lg:hidden p-5">
+              <div className="lg:hidden p-5 bg-[#0a0b12]">
                 {activeTab === "preview" ? (
                   <div className="prose prose-invert max-w-none prose-headings:text-white prose-a:text-orange-400 text-xs sm:text-sm overflow-y-auto max-h-[500px]">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>

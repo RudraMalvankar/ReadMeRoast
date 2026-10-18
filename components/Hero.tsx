@@ -19,31 +19,31 @@ export function Hero() {
             <span className="block">Let&apos;s find out.</span>
           </h1>
 
-          {/* Handwritten Annotation on the right */}
-          <div className="hidden lg:block absolute -right-36 top-16 text-left transform rotate-3">
-            <div className="font-handwritten text-xl sm:text-2xl text-amber-500/90 leading-tight space-y-0.5 select-none">
+          {/* Handwritten Annotation on the right (only when there's ample room) */}
+          <div className="hidden xl:block absolute -right-52 top-8 text-left transform rotate-2 select-none pointer-events-none">
+            <div className="font-handwritten text-2xl text-amber-500/90 leading-tight space-y-0.5 whitespace-nowrap">
               <div>Better documentation</div>
               <div>More contributors</div>
               <div>Happier you</div>
             </div>
-            {/* Hand-drawn curved arrow pointing to the input bar */}
-            <div className="relative -left-6 mt-1">
+            {/* Hand-drawn curved arrow pointing down toward input */}
+            <div className="relative left-6 mt-2">
               <svg
-                width="84"
-                height="65"
-                viewBox="0 0 84 65"
+                width="65"
+                height="75"
+                viewBox="0 0 65 75"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 className="text-amber-500/80 stroke-current"
               >
                 <path
-                  d="M70 4C55 12 25 22 14 44C11 50 10 56 12 59"
+                  d="M40 4C35 22 28 42 14 58C11 62 8 66 6 68"
                   strokeWidth="2.2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <path
-                  d="M5 50C7 54 11 59 12 59C13 59 20 57 23 55"
+                  d="M2 58C3 63 6 68 6 68C8 67 15 63 18 60"
                   strokeWidth="2.2"
                   strokeLinecap="round"
                   strokeLinejoin="round"

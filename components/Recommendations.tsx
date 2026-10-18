@@ -17,16 +17,19 @@ export function Recommendations({ recommendations }: RecommendationsProps) {
       <div className="space-y-3 flex-1">
         {recommendations.slice(0, 5).map((rec, idx) => {
           const num = String(idx + 1).padStart(2, "0");
+          // Clean any leading numeric prefix from AI text like "1. ", "01. ", "1 - "
+          const cleanText = rec.replace(/^(\d+[\.\-\)]\s*)+/, "").trim();
+
           return (
             <div
               key={idx}
               className="group flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-[#131620] px-4 py-3 text-xs sm:text-sm text-zinc-200 hover:border-zinc-700 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <span className="font-mono text-xs font-bold text-amber-400 rounded bg-amber-500/10 px-1.5 py-0.5 border border-amber-500/20">
+                <span className="font-mono text-xs font-bold text-amber-400 rounded bg-amber-500/10 px-1.5 py-0.5 border border-amber-500/20 flex-shrink-0">
                   {num}
                 </span>
-                <span className="leading-snug">{rec}</span>
+                <span className="leading-snug text-zinc-200">{cleanText}</span>
               </div>
               <ArrowRight className="h-4 w-4 text-zinc-500 group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
             </div>

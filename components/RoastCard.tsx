@@ -19,7 +19,7 @@ export function RoastCard({ roast }: RoastCardProps) {
   };
 
   return (
-    <div className="h-full rounded-2xl border border-orange-500/40 bg-[#121118] p-6 shadow-xl flex flex-col justify-between">
+    <div className="h-full rounded-2xl border border-orange-500/30 bg-[#121118] p-6 shadow-xl flex flex-col justify-between">
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-orange-500/20 mb-4">
         <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-orange-400">
@@ -30,16 +30,16 @@ export function RoastCard({ roast }: RoastCardProps) {
         <button
           type="button"
           onClick={handleCopyRoast}
-          className="flex items-center gap-1.5 rounded-md border border-white/[0.08] bg-zinc-900/90 px-2.5 py-1 text-xs font-mono text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors cursor-pointer"
+          className="flex items-center gap-1.5 rounded-lg border border-white/[0.1] bg-zinc-900/90 px-3 py-1 text-xs font-mono text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors cursor-pointer"
         >
           {copiedRoast ? (
             <>
-              <Check className="h-3 w-3 text-emerald-400" />
-              <span className="text-emerald-400">Copied</span>
+              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <span className="text-emerald-400 font-medium">Copied</span>
             </>
           ) : (
             <>
-              <Copy className="h-3 w-3" />
+              <Copy className="h-3.5 w-3.5" />
               <span>Copy</span>
             </>
           )}
@@ -48,7 +48,7 @@ export function RoastCard({ roast }: RoastCardProps) {
 
       {/* Quote Body */}
       <div className="flex-1 flex items-center">
-        <blockquote className="text-base sm:text-lg text-zinc-100 font-mono italic leading-relaxed">
+        <blockquote className="text-base sm:text-lg text-zinc-200 font-sans leading-relaxed">
           &ldquo;{roast}&rdquo;
         </blockquote>
       </div>
