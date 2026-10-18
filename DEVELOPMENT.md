@@ -31,3 +31,9 @@ Factual progress log tracking major development milestones, design choices, and 
 - Added comprehensive error handling for `NOT_FOUND`, `NO_README`, `RATE_LIMITED`, and network failures without exposing raw errors.
 - Added API route `app/api/repo/route.ts` with validation and caching headers.
 - Verified Next.js dynamic route compilation and strict TypeScript types.
+
+### Milestone 5: README Analysis Schema & Output Contract
+- Defined full Zod schemas for overall scores, 7 category metrics (`clarity`, `documentation`, `setup`, `usage`, `examples`, `visuals`, `developerExperience`), problems with severity rating, and prioritized recommendations.
+- Added `sanitizeAnalysisJson` with value clamping in [0, 100], graceful type coercion, and defensive fallback defaults for AI generation resilience.
+- Created `AnalysisResponse` type contract bridging backend services and frontend display components.
+- Verified TypeScript compilation and build.
