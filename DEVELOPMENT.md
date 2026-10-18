@@ -37,3 +37,9 @@ Factual progress log tracking major development milestones, design choices, and 
 - Added `sanitizeAnalysisJson` with value clamping in [0, 100], graceful type coercion, and defensive fallback defaults for AI generation resilience.
 - Created `AnalysisResponse` type contract bridging backend services and frontend display components.
 - Verified TypeScript compilation and build.
+
+### Milestone 6: Gemma 2 README Analysis Pipeline
+- Built `lib/ai/client.ts` with multi-provider abstraction supporting Google AI Studio (`gemma-2-27b-it`), Groq (`gemma2-9b-it`), OpenAI-compatible custom endpoints, and resilient offline heuristic analysis.
+- Built `lib/ai/analyze-readme.ts` implementing the comprehensive ReadMeRoast system prompt, 7-dimension scoring criteria, roast generation, and prompt injection defense.
+- Created `app/api/analyze/route.ts` orchestrating URL validation, GitHub fetching, Gemma analysis, and structured JSON return.
+- Tested and verified Next.js dynamic API routes and build.
