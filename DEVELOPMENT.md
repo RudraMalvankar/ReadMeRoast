@@ -72,3 +72,9 @@ Factual progress log tracking major development milestones, design choices, and 
 - Integrated clickable external GitHub links and verified responsive badge layout.
 - Added graceful fallback handling when descriptions, licenses, or topics are omitted.
 - Verified end-to-end build and types pass.
+
+### Milestone 11: Production Environment Configuration
+- Created comprehensive `.env.example` documenting `GEMMA_API_KEY`, `GEMMA_MODEL`, `GITHUB_TOKEN`, alternative providers (Groq, OpenRouter, local Ollama), and optional services (`MONGODB_URI`, `SENTRY_DSN`).
+- Created `lib/env.ts` implementing runtime Zod schema parsing and safe fallback defaults.
+- Ensured strict exclusion of secrets from git tracking via `.gitignore`.
+- Verified production build and types pass.
