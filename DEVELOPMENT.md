@@ -24,3 +24,10 @@ Factual progress log tracking major development milestones, design choices, and 
 - Disallows invalid formats, reserved non-repo path names, and malformed targets with friendly error messaging.
 - Connected client-side input in `RepoInput.tsx` to shared validation module.
 - Verified production build and types pass.
+
+### Milestone 4: GitHub Metadata & README Fetching Service
+- Implemented `lib/github.ts` to fetch repository metadata (stars, forks, open issues, language, branch, description) and README content via GitHub REST API.
+- Implemented safe Base64 decoding with size protection (truncating at 24k characters with `isTruncated` notification flag).
+- Added comprehensive error handling for `NOT_FOUND`, `NO_README`, `RATE_LIMITED`, and network failures without exposing raw errors.
+- Added API route `app/api/repo/route.ts` with validation and caching headers.
+- Verified Next.js dynamic route compilation and strict TypeScript types.
