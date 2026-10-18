@@ -23,12 +23,12 @@ export function CategoryScores({ scores }: CategoryScoresProps) {
   };
 
   return (
-    <div className="h-full rounded-2xl border border-white/[0.08] bg-[#10131c] p-6 shadow-xl flex flex-col justify-between">
+    <div className="h-full rounded-2xl border border-white/[0.08] bg-[#10131c] p-6 shadow-xl flex flex-col">
       <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-5">
         README HEALTH
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3.5 flex-1">
         {CATEGORY_ITEMS.map(({ key, label }) => {
           const val = scores[key] ?? 50;
           const { bar, text } = getColorClass(val);

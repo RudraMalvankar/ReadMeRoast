@@ -28,6 +28,10 @@ function RoastContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<{ message: string; code?: string } | null>(null);
 
+  // Track Improved README generation state (only on explicit user click)
+  const [isFixLoading, setIsFixLoading] = useState(false);
+  const [isFixGenerated, setIsFixGenerated] = useState(false);
+
   const improvedReadmeRef = useRef<ImprovedReadmeRef>(null);
 
   const fetchAnalysis = async (targetUrl: string) => {
@@ -133,7 +137,7 @@ function RoastContent() {
   if (!data) return null;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 space-y-6 flex-1 w-full">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-8 space-y-5 flex-1 w-full">
       {/* 1. Repository Header with Top Action Bar */}
       <RepoHeader
         metadata={data.metadata}
@@ -178,6 +182,8 @@ function RoastContent() {
                 improvedReadmeRef.current.generate();
               }
             }}
+            isLoading={isFixLoading}
+            isGenerated={isFixGenerated}
           />
         </div>
       </div>
@@ -187,6 +193,8 @@ function RoastContent() {
         ref={improvedReadmeRef}
         repoUrl={urlParam || ""}
         analysisData={data}
+        onLoadingChange={setIsFixLoading}
+        onGeneratedChange={setIsFixGenerated}
       />
     </div>
   );
