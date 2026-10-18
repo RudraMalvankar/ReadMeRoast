@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: readmeroast
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMMA_MODEL
+        value: gemma-2-27b-it
+      - key: GEMMA_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false

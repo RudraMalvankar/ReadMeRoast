@@ -78,3 +78,10 @@ Factual progress log tracking major development milestones, design choices, and 
 - Created `lib/env.ts` implementing runtime Zod schema parsing and safe fallback defaults.
 - Ensured strict exclusion of secrets from git tracking via `.gitignore`.
 - Verified production build and types pass.
+
+### Milestone 12: Production Deployment Preparation & Verification Suite
+- Created `render.yaml` deployment blueprint targeting Render Web Service environment with automated build and health check parameters.
+- Penned production-grade project `README.md` documenting architecture, Gemma 2 open-weight rationale, local setup, real-world test matrix, and Hacktoberfest challenge compliance.
+- Created `LICENSE` under the standard open-source MIT License.
+- Built automated verification test suite (`scripts/test-readmeroast.mjs`) covering URL validation, shorthand syntax parsing, reserved path rejection, Zod schema sanitization, and defensive score clamping.
+- Verified `npm test` passes 15/15 checks and `npm run build` passes with zero TypeScript warnings.
