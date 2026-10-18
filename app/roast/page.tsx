@@ -14,6 +14,7 @@ import { RoastCard } from "@/components/RoastCard";
 import { Strengths } from "@/components/Strengths";
 import { Problems } from "@/components/Problems";
 import { Recommendations } from "@/components/Recommendations";
+import { ImprovedReadme } from "@/components/ImprovedReadme";
 import { AnalysisResponse } from "@/types/analysis";
 import { AlertCircle, ArrowLeft, RefreshCw, Sparkles, Skull, Flame } from "lucide-react";
 
@@ -187,6 +188,9 @@ function RoastContent() {
           <span>Fix My README</span>
         </button>
       </div>
+
+      {/* Improved README Section */}
+      <ImprovedReadme repoUrl={urlParam || ""} analysisData={data} />
     </div>
   );
 }

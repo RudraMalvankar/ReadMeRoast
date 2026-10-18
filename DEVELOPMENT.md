@@ -54,3 +54,9 @@ Factual progress log tracking major development milestones, design choices, and 
 - Built `Problems` component sorted by severity (High, Medium, Low) with clear explanation and recommended fix callouts.
 - Built `Recommendations` component displaying high-ROI numbered action steps.
 - Built `app/roast/page.tsx` integrating Suspense query retrieval, API execution, confetti celebration for top scores, and error states.
+
+### Milestone 8: Improved README Generator
+- Built `lib/ai/improve-readme.ts` enforcing strict zero-hallucination rules (only reorganizing verified facts, inserting clear placeholders for missing details, preserving real code and badges).
+- Built API route `app/api/improve/route.ts` accepting repository metadata, original README, and diagnostic analysis.
+- Built `ImprovedReadme` component with developer-editor styling, `README.md` file tab, line/character count metrics, Raw Markdown vs Formatted Markdown Preview tabs, one-click clipboard copy, and file download trigger (`.md`).
+- Verified end-to-end build and routes (`/api/improve`, `/roast`).
